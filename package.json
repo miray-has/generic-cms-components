@@ -1,6 +1,6 @@
 {
   "name": "generic-cms-components",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Generic react components for cms websites",
   "main": "./lib/index.js",
   "license": "MIT",
