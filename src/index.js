@@ -12,7 +12,6 @@ import OneColumnWideImage from "./uiElements/_oneColumnWideImage.jsx";
 import ThreeColumnImage from "./uiElements/_threeColumnImage.jsx";
 import OneColumnAndOneImage from "./uiElements/_oneColumnAndOneImage.jsx";
 import TwoColumnImageWithText from "./uiElements/_twoColumnImageWithText.jsx";
-import PageItem from "./uiElements/PageItem.jsx";
 
 //_common
 import GenericContentList from "./_common/_genericContentList.jsx";
@@ -26,21 +25,12 @@ import TagLink from "./_common/_tagLink.jsx";
 import TagNav from "./_common/_tagNav.jsx";
 import OptimisedImage from "./_common/_optimisedImage.jsx";
 
-//popcms
-import AdminContentBlockMenu from "./popcms/AdminContentBlockMenu.jsx";
-
-// .. overlayComponents
-import AddPageOverlay from "./popcms/overlayComponents/AddPageOverlay.jsx";
-import PageSettingsOverlay from "./popcms/overlayComponents/PageSettingsOverlay.jsx";
-
 //auth
 import * as authProvider from './auth/authProvider.jsx';
 
 //uiElements
-export { ContactItem, Pagination, Banner, Button, FaqComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, PageItem };
+export { ContactItem, Pagination, Banner, Button, FaqComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage };
 //_common
 export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage };
-//popcms
-export { AdminContentBlockMenu, AddPageOverlay, PageSettingsOverlay };
 //auth 
 export { authProvider };

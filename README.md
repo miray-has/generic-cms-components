@@ -40,15 +40,6 @@ Includes the following as ui elements:
 * one wide image content
 * three column image
 * pagination
-* page item 
-
-Includes the following as popcms:
-
-* media library
-* overlay components 
-	* AddPageOverlay
-	* PageSettingsOverlay
-* AdminContentBlockMenu
 
 Includes the following as auth:
 
