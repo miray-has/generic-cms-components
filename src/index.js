@@ -44,11 +44,6 @@ import AddPageOverlay from "./popcms/overlayComponents/AddPageOverlay.jsx";
 import PageSettingsOverlay from "./popcms/overlayComponents/PageSettingsOverlay.jsx";
 import PublishOverlay from "./popcms/overlayComponents/PublishOverlay.jsx";
 
-//layout
-import Layout from "./layout/Layout.jsx";
-import Menu from "./layout/Menu.jsx";
-import Footer from "./layout/Footer.jsx";
-
 //auth
 import * as authProvider from './auth/authProvider.jsx';
 
@@ -58,7 +53,5 @@ export { ContactItem, Pagination, Banner, Button, FaqComponent, InternalLink, On
 export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, apiUtils, FileUpload };
 //popcms
 export { AdminContentBlockMenu, AdminMenu, Authentication, ClientServerDataResolver, Index, MediaLibrary, AddMediaOverlay, AddPageOverlay, PageSettingsOverlay, PublishOverlay };
-//layout 
-export { Layout, Menu, Footer };
 //auth 
 export { authProvider };

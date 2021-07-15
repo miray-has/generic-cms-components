@@ -7,7 +7,7 @@ Generic components to be used on cms websites
 `npm install generic-cms-components`
 
 ```
-
+import { TextInput } from 'generic-cms-components';
 
 ```
 
@@ -41,3 +41,22 @@ Includes the following as ui elements:
 * two column content
 * three column content
 * page item 
+
+Includes the following as popcms:
+
+* media library
+	* Index
+* overlay components 
+	* AddMediaOverlay
+	* AddPageOverlay
+	* PageSettingsOverlay
+	* PublishOverlay
+* AdminContentBlockMenu
+* AdminMenu
+* Authentication
+* ClientServerDataResolver
+* Index
+
+Includes the following as auth:
+
+* authProvider
