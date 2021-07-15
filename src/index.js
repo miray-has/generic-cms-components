@@ -25,24 +25,13 @@ import ImageContentInput from "./_common/_imageContentInput.jsx";
 import TagLink from "./_common/_tagLink.jsx";
 import TagNav from "./_common/_tagNav.jsx";
 import OptimisedImage from "./_common/_optimisedImage.jsx";
-import * as apiUtils from "./_common/apiUtils.js";
-import FileUpload from "./_common/fileUpload.jsx";
 
 //popcms
 import AdminContentBlockMenu from "./popcms/AdminContentBlockMenu.jsx";
-import AdminMenu from "./popcms/AdminMenu.jsx";
-import Authentication from "./popcms/Authentication.jsx";
-import ClientServerDataResolver from "./popcms/ClientServerDataResolver.jsx";
-import Index from "./popcms/Index.jsx";
-
-// .. mediaLibrary
-import MediaLibrary from "./popcms/mediaLibrary/Index.jsx";
 
 // .. overlayComponents
-import AddMediaOverlay from "./popcms/overlayComponents/AddMediaOverlay.jsx";
 import AddPageOverlay from "./popcms/overlayComponents/AddPageOverlay.jsx";
 import PageSettingsOverlay from "./popcms/overlayComponents/PageSettingsOverlay.jsx";
-import PublishOverlay from "./popcms/overlayComponents/PublishOverlay.jsx";
 
 //auth
 import * as authProvider from './auth/authProvider.jsx';
@@ -50,8 +39,8 @@ import * as authProvider from './auth/authProvider.jsx';
 //uiElements
 export { ContactItem, Pagination, Banner, Button, FaqComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, PageItem };
 //_common
-export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, apiUtils, FileUpload };
+export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage };
 //popcms
-export { AdminContentBlockMenu, AdminMenu, Authentication, ClientServerDataResolver, Index, MediaLibrary, AddMediaOverlay, AddPageOverlay, PageSettingsOverlay, PublishOverlay };
+export { AdminContentBlockMenu, AddPageOverlay, PageSettingsOverlay };
 //auth 
 export { authProvider };

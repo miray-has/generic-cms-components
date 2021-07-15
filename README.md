@@ -15,7 +15,6 @@ import { TextInput } from 'generic-cms-components';
 
 Includes the following as common elements:
 
-* footer
 * generic content list
 * generic context
 * image
@@ -35,27 +34,21 @@ Includes the following as ui elements:
 * faq component
 * internal link
 * one column content
-* one text column and image content 
-* one wide image content
-* pagination
 * two column content
 * three column content
+* one column text and image 
+* one wide image content
+* three column image
+* pagination
 * page item 
 
 Includes the following as popcms:
 
 * media library
-	* Index
 * overlay components 
-	* AddMediaOverlay
 	* AddPageOverlay
 	* PageSettingsOverlay
-	* PublishOverlay
 * AdminContentBlockMenu
-* AdminMenu
-* Authentication
-* ClientServerDataResolver
-* Index
 
 Includes the following as auth:
 
