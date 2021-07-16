@@ -1,9 +1,10 @@
 ﻿import { useState, useEffect } from 'react';
+import { Link, StaticRouter as Router } from 'react-router-dom'
+import PropTypes from 'prop-types';
+
 import ImageContentInput from '../_common/_imageContentInput.jsx';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 export default function TwoColumnImageWithText(props) {
 
@@ -97,7 +98,9 @@ function ColumnImageWithText(props) {
 					}
 					{!props.isAdmin &&
 						<>
-							<div><h3><Link to={`${state.imageUrl}`}>{state.header}</Link></h3></div>
+							<Router>
+								<div><h3><Link to={`${state.imageUrl}`}>{state.header}</Link></h3></div>
+							</Router>
 							<div><p>{state.subtext}</p></div>
 						</>
 					}
