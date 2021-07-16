@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link, StaticRouter as Router } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
@@ -35,11 +35,13 @@ export default function Button(props) {
 						}
 						{!props.isAdmin &&
 							<>
-							<button>
-								<BrowserRouter>
-									<Link to={`${state.buttonText}`}>{state.buttonText}</Link>
-								</BrowserRouter>
-							</button>
+								<Router>
+									<Link to={`${state.buttonText}`}>
+										<button>
+											{state.buttonText}
+										</button>
+									</Link>
+								</Router>
 							</>
 						}
 					</div>
