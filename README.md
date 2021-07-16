@@ -32,6 +32,7 @@ Includes the following as ui elements:
 * button
 * contact item
 * faq component
+* logo component
 * internal link
 * one column content
 * two column content

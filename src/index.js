@@ -4,6 +4,7 @@ import Pagination from "./uiElements/_pagination.jsx";
 import Banner from "./uiElements/_banner.jsx";
 import Button from "./uiElements/_button.jsx";
 import FaqComponent from "./uiElements/_faqComponent.jsx";
+import LogoComponent from "./uiElements/_logoComponent";
 import InternalLink from "./uiElements/_internalLink.jsx";
 import OneColumnContent from "./uiElements/_oneColumnContent.jsx";
 import TwoColumnContent from "./uiElements/_twoColumnContent.jsx";
@@ -29,7 +30,7 @@ import OptimisedImage from "./_common/_optimisedImage.jsx";
 import * as authProvider from './auth/authProvider.jsx';
 
 //uiElements
-export { ContactItem, Pagination, Banner, Button, FaqComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage };
+export { ContactItem, Pagination, Banner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage };
 //_common
 export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage };
 //auth 
