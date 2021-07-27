@@ -1,5 +1,5 @@
 ﻿import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, StaticRouter as Router } from 'react-router-dom';
 
 export default function EditableInput(props) {
 	return (
@@ -10,10 +10,13 @@ export default function EditableInput(props) {
 					</>
 			}
 			{!props.isAdmin &&
-					<>
+				<>
+					<Router>
 						<Link to={props.link}>
 							{props.value}
 						</Link>
+					</Router>
+
 					</>
 			}
 		</>
