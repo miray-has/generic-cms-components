@@ -25,6 +25,8 @@ Includes the following as common elements:
 * tag nav
 * text content input
 * text input 
+* editable input 
+* editable textarea
 
 Includes the following as ui elements:
 

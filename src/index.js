@@ -25,6 +25,8 @@ import ImageContentInput from "./_common/_imageContentInput.jsx";
 import TagLink from "./_common/_tagLink.jsx";
 import TagNav from "./_common/_tagNav.jsx";
 import OptimisedImage from "./_common/_optimisedImage.jsx";
+import EditableInput from "./_common/_editableInput.jsx";
+import EditableTextarea from "./_common/_editableTextarea.jsx";
 
 //auth
 import * as authProvider from './auth/authProvider.jsx';
@@ -32,6 +34,6 @@ import * as authProvider from './auth/authProvider.jsx';
 //uiElements
 export { ContactItem, Pagination, Banner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage };
 //_common
-export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage };
+export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, EditableInput, EditableTextarea };
 //auth 
 export { authProvider };
