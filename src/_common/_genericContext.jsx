@@ -87,9 +87,9 @@ export const GenericProvider = (props) => {
 	}, [items]);
 
 	return (
-		<React.Fragment>
+		<>
 			{props.children(items, tags, setFilterTags)}
-		</React.Fragment>
+		</>
 
 	);
 }

@@ -5,6 +5,6 @@ export default function Image(props) {
 		<img
 			src={ props.src } 
 			alt={ props.title }
-			/>
+		/>
 	)
 }

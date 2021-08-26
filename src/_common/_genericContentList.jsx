@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export default function GenericContentList(props) {
 	return (
-		<React.Fragment> 
+		<> 
 			<GenericProvider
 				dataUrl={props.dataUrl}
 				adminFilter={props.options.adminFilter}
@@ -35,7 +35,7 @@ export default function GenericContentList(props) {
 				}
 				}
 			</GenericProvider>
-		</React.Fragment>
+		</>
 	);
 }
 

@@ -3,11 +3,9 @@
     "",
     "\\lib",
     "\\src",
-    "\\src\\layout",
-    "\\src\\popcms",
-    "\\src\\popcms\\mediaLibrary",
+    "\\src\\uiElements",
     "\\src\\_common"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\uiElements\\_button.jsx",
   "PreviewInSolutionExplorer": false
 }

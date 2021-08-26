@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
-import { Link, StaticRouter as Router } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
 import Image from '../_common/_image.jsx';
@@ -98,9 +98,9 @@ function FaqComponentItem(props) {
 					<div className="logo-info">
 						<h4>{props.title}</h4>
 						<p>{props.subtext}</p>
-						<Router>
+						<Route>
 							<div><p><Link to={props.url}>Learn more</Link></p></div>
-						</Router>
+						</Route>
 					</div>
 				</div>
 			</div>
