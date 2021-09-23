@@ -8,7 +8,7 @@ export default function Button(props) {
 
 	const [state, setState] = useState({
 		buttonText: props.value?.buttonText,
-		buttonUrl: props.value?.buttonUrl
+		buttonUrl: props.options?.buttonUrl
 	});
 
 	function onPropertyChange(name, value) {
@@ -22,6 +22,11 @@ export default function Button(props) {
 	function onChange({ target }) {
 		onPropertyChange(target.name, target.value);
 	}
+
+	function linkEventHandler(e) {
+		props.toLink(state.buttonUrl, e);
+	}
+
 	return (
 		<div id="hmpage-button">
 			<div id="homepage-button">
@@ -36,11 +41,11 @@ export default function Button(props) {
 						}
 						{!props.isAdmin &&
 							<>
-								<Link to={props.options.buttonUrl}>
+								<div onClick={linkEventHandler}>
 									<button>
 										{state.buttonText}
 									</button>
-								</Link>
+								</div>
 							</>
 						}
 					</div>

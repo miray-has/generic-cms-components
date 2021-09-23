@@ -22,11 +22,8 @@ export function getMsalConfig() {
 	// Config object to be passed to Msal on creation
 	const msalConfig = {
 		auth: {
-			clientId: "bce3872e-afcd-456d-9420-0a50e7e91667",
-			authority: "https://login.microsoftonline.com/5653eccb-d8e1-48e9-aea3-82db6381f7dd/",
-			redirectUri: "/login/",
-			postLogoutRedirectUri: "/",
-
+			clientId: "f2cc3ccc-5244-4da5-b610-3a10cad345c8",
+			authority: "https://login.microsoftonline.com/ed0a539d-3623-432d-a192-ba4a50e762a7"
 		},
 		cache: {
 			cacheLocation: "localStorage",

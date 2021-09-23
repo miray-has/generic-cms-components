@@ -13,9 +13,12 @@ export default function OneColumnWideImage(props) {
 			props.onChange(props.name, newValue);
 		}
 	}
+	function cssClass() {
+		return `one-column-wide-image ${typeof (props.options.cssClass) !== "undefined" ? props.options.cssClass : ""}`;
+	}
 
 	return (
-		<div>
+		<div className={cssClass()}>
 			<div className={`wide-image ${props.options.cssClass} `}>
 				<div>
 					<ImageContentInput

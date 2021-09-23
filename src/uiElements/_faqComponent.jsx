@@ -1,9 +1,7 @@
 ﻿import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
 import Image from '../_common/_image.jsx';
-
 
 export default function FaqComponent(props) {
 
@@ -33,7 +31,6 @@ export default function FaqComponent(props) {
 		url4: "/emerging-technologies"
 	});
 
-
 	return (
 		<div>
 			<div id="faq-component">
@@ -44,6 +41,7 @@ export default function FaqComponent(props) {
 						title={state.title1}
 						subtext={state.subtext1}
 						url={state.url1}
+						toLink={props.toLink}
 					/>
 					<FaqComponentItem
 						question={state.question2}
@@ -51,6 +49,7 @@ export default function FaqComponent(props) {
 						title={state.title2}
 						subtext={state.subtext2}
 						url={state.url2}
+						toLink={props.toLink}
 					/>
 				</div>
 			</div>
@@ -63,6 +62,7 @@ export default function FaqComponent(props) {
 						title={state.title3}
 						subtext={state.subtext3}
 						url={state.url3}
+						toLink={props.toLink}
 					/>
 					<FaqComponentItem
 						question={state.question4}
@@ -70,6 +70,7 @@ export default function FaqComponent(props) {
 						title={state.title4}
 						subtext={state.subtext4}
 						url={state.url4}
+						toLink={props.toLink}
 					/>
 				</div>
 			</div>
@@ -81,6 +82,10 @@ export default function FaqComponent(props) {
 }
 
 function FaqComponentItem(props) {
+
+	function linkEventHandler(e) {
+		props.toLink(props.url, e);
+	}
 
 	return (
 		<div>
@@ -96,11 +101,9 @@ function FaqComponentItem(props) {
 						/>
 					</div>
 					<div className="logo-info">
-						<h4>{props.title}</h4>
+						<h3>{props.title}</h3>
 						<p>{props.subtext}</p>
-						<Route>
-							<div><p><Link to={props.url}>Learn more</Link></p></div>
-						</Route>
+						<div onClick={linkEventHandler}><p>Learn more</p></div>
 					</div>
 				</div>
 			</div>

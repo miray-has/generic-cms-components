@@ -19,7 +19,7 @@ export default function OneColumnAndOneImage(props) {
 	}
 
 	return (
-		<div>
+		<div className="two-column">
 			<div className={`two-column-content ${props.options.cssClass} `}>
 				<div>
 					<TextContentInput

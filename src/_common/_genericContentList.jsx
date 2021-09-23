@@ -12,7 +12,8 @@ export default function GenericContentList(props) {
 				adminFilter={props.options.adminFilter}
 				primaryTag={props.primaryTag}
 				showCaseValue={props.showCaseValue}
-				numberOfItems={props.options.numberOfItems}>
+				numberOfItems={props.options.numberOfItems}
+				data={props.data}>
 
 				{(items, tags, onTagSelected, handleFilter) => {
 					return (

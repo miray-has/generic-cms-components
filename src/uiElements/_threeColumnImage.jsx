@@ -27,7 +27,7 @@ export default function ThreeColumnContent(props) {
 	}
 
 	function cssClass() {
-		return `feature-image-pair image-wide ${typeof (props.options.cssClass) !== "undefined" ? props.options.cssClass : ""}`;
+		return `three-column-image ${typeof (props.options.cssClass) !== "undefined" ? props.options.cssClass : ""}`;
 	}
 
 	return (
@@ -39,20 +39,24 @@ export default function ThreeColumnContent(props) {
 					value={state.col1}
 					onChange={onPropertyChange}
 					imageUrl={state.imageUrl1}
+					link={props.col1Link}
+					toLink={props.toLink}
 				/>
 				<ColumnImageWithText
 					name="col2"
 					isAdmin={props.isAdmin}
 					value={state.col2}
 					onChange={onPropertyChange}
-					imageUrl={state.imageUrl2}
+					link={props.col2Link}
+					toLink={props.toLink}
 				/>
 				<ColumnImageWithText
 					name="col3"
 					isAdmin={props.isAdmin}
 					value={state.col3}
 					onChange={onPropertyChange}
-					imageUrl={state.imageUrl3}
+					link={props.col3Link}
+					toLink={props.toLink}
 				/>
 			</div>
 			<Options isVisible={props.optionsMenuOpen} options={props.options} onOptionsChange={props.onOptionsChange} onOptionsHide={props.onOptionsHide} />
@@ -81,7 +85,7 @@ function ColumnImageWithText(props) {
 	}
 
 	return (
-		<div>
+		<div onClick={(e) => props.toLink(props.link, e)}>
 			<div>
 				<ImageContentInput
 					name="imageUrl"
@@ -89,29 +93,6 @@ function ColumnImageWithText(props) {
 					value={state.imageUrl}
 					onChange={onPropertyChange}
 				/>
-				<div>
-					{props.isAdmin &&
-						<>
-							<div>
-								<h3>
-									<input type="text" name="header" value={state.header} onChange={onChange} />
-								</h3>
-							</div>
-							<div>
-								<p>
-									<input type="text" name="subtext" value={state.subtext} onChange={onChange} />
-								</p>
-							</div>
-						</>
-					}
-					{!props.isAdmin &&
-						<>
-							<div><h3><Link to={`${state.imageUrl}`}>{state.header}</Link></h3></div>
-							<div><p>{state.subtext}</p></div>
-						</>
-					}
-				</div>
-
 			</div>
 		</div>
 	)
@@ -155,6 +136,12 @@ function Options(props) {
 					label="Image Link 2"
 					name="imageUrl2"
 					value={state.imageUrl2}
+					onChange={onChange}
+				/>
+				<TextInput
+					label="Image Link 3"
+					name="imageUrl3"
+					value={state.imageUrl3}
 					onChange={onChange}
 				/>
 				<button onClick={props.onHide} className="btn btn-danger">Cancel</button>

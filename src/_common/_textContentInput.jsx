@@ -31,7 +31,9 @@ export default function TextContentEditor(props) {
 					link_default_protocol: 'https',
 					link_assume_external_targets: 'https',
 					default_link_target: '_self',
+					fontsize_formats: "64px",
 					toolbar: 'undo redo | formatselect | ' +
+						'fontsizeselect | ' +
 						'bold italic underline | link unlink | ' +
 						'bullist numlist | ' + 'ltr rtl | ' +
 						'alignleft aligncenter alignright alignjustify | ' +

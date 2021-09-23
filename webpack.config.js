@@ -24,10 +24,16 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.jsx'],
+        alias: {
+            react: path.resolve('./node_modules/react'),
+            'react-router': path.resolve('./node_modules/react-router'),
+            'react-router-dom': path.resolve('./node_modules/react-router-dom')
+        }
     },
     externals: {
         "react": "commonjs react",
         "react-dom": "commonjs react-dom",
-        'react-router-dom': 'react-router-dom',
+        'react-router-dom': 'commonjs react-router-dom'
+
     }
 }

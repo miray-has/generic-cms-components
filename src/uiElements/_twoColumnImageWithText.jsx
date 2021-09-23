@@ -1,5 +1,4 @@
 ﻿import { useState, useEffect } from 'react';
-import { Link, StaticRouter as Router } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 import ImageContentInput from '../_common/_imageContentInput.jsx';
@@ -8,12 +7,14 @@ import Overlay from '../_common/_overlay.jsx';
 
 export default function TwoColumnImageWithText(props) {
 
+	const [textOption, setTextOption] = useState(props.options?.textOption || "yes");
+
 	const [state, setState] = useState({
 		col1: props.value?.col1,
 		col2: props.value?.col2,
 
 		imageUrl1: props.options?.imageUrl1,
-		imageUrl2: props.options?.imageUrl2
+		imageUrl2: props.options?.imageUrl2,
 	});
 
 	function onPropertyChange(name, value) {
@@ -25,30 +26,38 @@ export default function TwoColumnImageWithText(props) {
 	}
 
 	function cssClass() {
-		return `feature-image-pair ${typeof (props.options.cssClass) !== "undefined" ? props.options.cssClass : ""}`;
+		return `feature-image-pair ${typeof (props.options.cssClass) !== "undefined" ? props.options.cssClass : ""} ${textOption === "Yes" || textOption === "yes" ? "text-background" : "text-background-none"}`;
 	}
 
 	return (
-		<div className={cssClass()}>
-			<div className="two-column-content">
-				<ColumnImageWithText
-					name="col1"
-					isAdmin={props.isAdmin}
-					value={state.col1}
-					onChange={onPropertyChange}
-					imageUrl={state.imageUrl1}
-				/>
-				<ColumnImageWithText
-					name="col2"
-					isAdmin={props.isAdmin}
-					value={state.col2}
-					onChange={onPropertyChange}
-					imageUrl={state.imageUrl2}
-
-				/>
+		<>
+			<div className={cssClass()}>
+				<div className="two-column-content">
+					<ColumnImageWithText
+						name="col1"
+						value={state.col1}
+						isAdmin={props.isAdmin}
+						onChange={onPropertyChange}
+						imageUrl={state.imageUrl1}
+						link={props.col1Link}
+						toLink={props.toLink}
+						textOption={textOption}
+					/>
+					<ColumnImageWithText
+						name="col2"
+						isAdmin={props.isAdmin}
+						value={state.col2}
+						onChange={onPropertyChange}
+						imageUrl={state.imageUrl2}
+						link={props.col2Link}
+						toLink={props.toLink}
+						textOption={textOption}
+					/>
+				</div>
 			</div>
 			<Options isVisible={props.optionsMenuOpen} options={props.options} onOptionsChange={props.onOptionsChange} onOptionsHide={props.onOptionsHide} />
-		</div>
+
+		</>
 	);
 }
 
@@ -59,6 +68,7 @@ function ColumnImageWithText(props) {
 		subtext: props.value?.subtext,
 		imageUrl: props.value?.imageUrl
 	});
+
 
 	function onPropertyChange(name, value) {
 		var newValue = { ...state, [name]: value };
@@ -72,8 +82,13 @@ function ColumnImageWithText(props) {
 		onPropertyChange(target.name, target.value);
 	}
 
+	function linkEventHandler(e) {
+		console.log(e);
+		props.toLink(props.link, e);
+	}
+
 	return (
-		<div>
+		<div onClick={linkEventHandler}>
 			<div>
 				<ImageContentInput
 					name="imageUrl"
@@ -85,9 +100,9 @@ function ColumnImageWithText(props) {
 					{props.isAdmin &&
 						<>
 							<div>
-								<h3>
+								<h4>
 									<input type="text" name="header" value={state.header} onChange={onChange} />
-								</h3>
+								</h4>
 							</div>
 							<div>
 								<p>
@@ -98,14 +113,11 @@ function ColumnImageWithText(props) {
 					}
 					{!props.isAdmin &&
 						<>
-							<Router>
-								<div><h3><Link to={`${state.imageUrl}`}>{state.header}</Link></h3></div>
-							</Router>
+							<div>{props.link}</div>
 							<div><p>{state.subtext}</p></div>
 						</>
 					}
 				</div>
-
 			</div>
 		</div>
 	)
@@ -149,6 +161,12 @@ function Options(props) {
 					label="Image Link 2"
 					name="imageUrl2"
 					value={state.imageUrl2}
+					onChange={onChange}
+				/>
+				<TextInput
+					label="Text option (Yes)"
+					name="textOption"
+					value={state.textOption}
 					onChange={onChange}
 				/>
 				<button onClick={props.onHide} className="btn btn-danger">Cancel</button>

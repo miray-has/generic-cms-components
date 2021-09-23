@@ -6,9 +6,48 @@ export const GenericContext = createContext();
 
 export const GenericProvider = (props) => {
 
-	const [items, setItems] = useState([]);
-	const [tags, setTags] = useState([]);
+	const [items, setItems] = useState(serverData() || []);
+	const [tags, setTags] = useState(serverTags() || []);
 	const [filterTag, setFilterTags] = useState(getInitialFilterTag());
+
+	function serverData() {
+		const data = JSON.parse(props.data['all']);
+		var relevantData = [];
+
+		for (const n of data) {
+
+			if ((n.PageUrl).includes(props.primaryTag)) {
+				relevantData.push(n);
+			}
+		}
+		return relevantData;
+    }
+
+	function serverTags() {
+		const data = JSON.parse(props.data['all']);
+		var relevantData = [];
+		var tagsTemp = [];
+
+		for (const n of data) {
+			if ((n.PageUrl).includes(props.primaryTag)) {
+				relevantData.push(n);
+
+				if (n.Options?.tags) {
+					var pageTags = n.Options.tags.split(",");
+
+					pageTags.forEach(tag => {
+						tag = tag.trim();
+						if (!tagsTemp.includes(tag) && tag != props.primaryTag) {
+							tagsTemp.push(tag);
+						}
+					});
+				}
+			}
+		}
+		console.debug(tagsTemp);
+		return tagsTemp;
+	}
+
 
 	function getInitialFilterTag() {
 		if (typeof (location) === "undefined" || location === null) {
@@ -23,37 +62,45 @@ export const GenericProvider = (props) => {
 	}
 
 	useEffect(() => {
+		var mounted = true;
 		var dataTagUrl = props.dataUrl;
 
 		fetch(dataTagUrl)
 			.then(response => response.json())
 			.then(json => {
-				if (props.numberOfItems != null || parseInt(props.numberOfItems) > 0) {
-					setItems(json.slice(0, (props.numberOfItems)));
-				} else setItems(json);
-				var tagsTemp = [];
+				if (mounted) {
+					if (props.numberOfItems != null || parseInt(props.numberOfItems) > 0) {
+						setItems(json.slice(0, (props.numberOfItems)));
+					} else setItems(json);
+					var tagsTemp = [];
 
-				json.forEach(page => {
-					if (page.settings.tags == null || page.settings.tags == "") {
-						return;
-					}
-					var pageTags = page.settings.tags.split(",");
-
-					pageTags.forEach(tag => {
-						tag = tag.trim();
-
-						if (!tagsTemp.includes(tag) && tag != props.adminFilter && tag != props.primaryTag) {
-							tagsTemp.push(tag);
+					json.forEach(page => {
+						if (page.settings.tags == null || page.settings.tags == "") {
+							return;
 						}
-					});
-				});
+						var pageTags = page.settings.tags.split(",");
 
-				setTags(tagsTemp);
+						pageTags.forEach(tag => {
+							tag = tag.trim();
+
+							if (!tagsTemp.includes(tag) && tag != props.adminFilter && tag != props.primaryTag) {
+								tagsTemp.push(tag);
+							}
+						});
+					});
+
+					setTags(tagsTemp);
+				}
 			})
-			.catch((err) => console.debug(err))
+			.catch((err) => console.debug(err));
+
+		return () => {
+			mounted = false;
+        }
 	}, []);
 
 	useEffect(() => {
+		var mounted = true;
 		var dataUrl = props.dataUrl;
 		var adminFilterTagValues = props.adminFilter;
 
@@ -74,13 +121,17 @@ export const GenericProvider = (props) => {
 		fetch(dataUrl)
 			.then(response => response.json())
 			.then(json => {
-				if (props.numberOfItems != null || props.numberOfItems != 'undefined' || props.numberOfItems < 0) {
-					setItems(json.slice(0, (props.numberOfItems)));
-				} else setItems(json);
+				if (mounted) {
+					if (props.numberOfItems != null || props.numberOfItems != 'undefined' || props.numberOfItems < 0) {
+						setItems(json.slice(0, (props.numberOfItems)));
+					} else setItems(json);
+				}
 			})
-			.catch((err) => console.debug(err))
+			.catch((err) => console.debug(err));
 
-
+		return () => {
+			mounted = false;
+		}
 	}, [filterTag, props.adminFilter]);
 
 	useEffect(() => {
