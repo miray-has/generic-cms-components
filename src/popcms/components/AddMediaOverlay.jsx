@@ -1,9 +1,8 @@
-﻿import { useEffect, useState } from 'react';
+﻿import { useState } from 'react';
 
 import FileUpload from '../../_common/fileUpload.jsx';
-
-import { Overlay } from 'generic-cms-components';
-import { TextInput } from 'generic-cms-components';
+import TextInput from '../../_common/TextInput.js';
+import Overlay from '../../_common/_overlay.jsx';
 
 export default function AddMediaOverlay(props) {
 	const [state, setState] = useState({ originalPixelDensity : 3, stage: 0 });

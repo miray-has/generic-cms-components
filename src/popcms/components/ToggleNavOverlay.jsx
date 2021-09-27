@@ -1,8 +1,4 @@
-﻿import { useEffect, useState } from 'react';
-
-import { Overlay } from 'generic-cms-components';
-import { TextInput } from 'generic-cms-components';
-
+﻿import Overlay from '../../_common/_overlay.jsx';
 
 export default function ToggleNavOverlay(props) {
 

@@ -1,7 +1,6 @@
-﻿//import * as msal from "@azure/msal-browser";
-//import { LogLevel } from "@azure/msal-browser";
+﻿import { Configuration } from './authConfig.jsx';
 
-export function getMsalConfig() {
+export async function getMsalConfig() {
 
 	if (window == null) {
 		return null;
@@ -19,11 +18,25 @@ export function getMsalConfig() {
 	const isEdge = msedge > 0;
 	const isFirefox = firefox > 0; // Only needed if you need to support the redirect flow in Firefox incognito
 
+	console.debug("Getting client config");
+
+	const config = await Configuration();
+
+
+
+
 	// Config object to be passed to Msal on creation
 	const msalConfig = {
 		auth: {
-			clientId: "f2cc3ccc-5244-4da5-b610-3a10cad345c8",
-			authority: "https://login.microsoftonline.com/ed0a539d-3623-432d-a192-ba4a50e762a7"
+			//clientId: config.clientId,
+			//Authority: config.authority,
+			//postLogoutRedirectUri: "/",
+
+			clientId: "bce3872e-afcd-456d-9420-0a50e7e91667",
+			authority: "https://login.microsoftonline.com/5653eccb-d8e1-48e9-aea3-82db6381f7dd/",
+			redirectUri: "/login/",
+			postLogoutRedirectUri: "/",
+
 		},
 		cache: {
 			cacheLocation: "localStorage",
@@ -36,11 +49,18 @@ export function getMsalConfig() {
 
 
 // Add here scopes for id token to be used at MS Identity Platform endpoints.
-export const loginRequest = {
-	redirectUri: "/login/",
-	postLogoutRedirectUri: "/",
-	scopes: ["api://8a58b3b3-4787-4b63-b8dc-5f06ce92eb76/content.edit"]
-};
+export async function getLoginRequest() {
+	const config = await Configuration();
+
+	const loginRequest = {
+		redirectUri: "/login/",
+		postLogoutRedirectUri: "/",
+		scopes: config.scopes
+	}
+
+	console.debug("loginRequest", loginRequest);
+	return loginRequest;
+}
 
 // Add here the endpoints for MS Graph API services you would like to use.
 export const graphConfig = {

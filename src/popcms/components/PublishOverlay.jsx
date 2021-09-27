@@ -1,8 +1,7 @@
-﻿import { useEffect, useState } from 'react';
-
-import { Overlay } from 'generic-cms-components';
-import { GetServerUrl } from '../ClientServerDataResolver.jsx';
-import { GetUserAccessToken } from '../Index.jsx';
+﻿import { useState } from 'react';
+import { GetUserAccessToken } from '../user/AccessToken.jsx';
+import { getCmsHostName } from '../Host/CmsHostName.jsx';
+import Overlay from '../../_common/_overlay.jsx';
 
 export default function PublishOverlay(props) {
 	const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +15,10 @@ export default function PublishOverlay(props) {
 		var accessToken = await GetUserAccessToken();
 
 		var bearer = "Bearer " + accessToken;
-		fetch(GetServerUrl() + "/api/publish/", {
+
+		var cmsHostName = await getCmsHostName();
+
+		fetch("https://" + cmsHostName + "/api/publish/", {
 			method: 'GET', // or 'PUT'
 			headers: {
 				'Content-Type': 'application/json',
@@ -40,10 +42,10 @@ export default function PublishOverlay(props) {
 			onHide={props.onHide}
 		>
 			<h2>Publish site</h2>
-			{ !isLoading &&
+			{!isLoading &&
 				<button className="btn btn-primary" onClick={doPublish} > Publish site</button>
 			}
-			{ isLoading &&
+			{isLoading &&
 				<div className="lds-hourglass"></div>
 			}
 		</Overlay>

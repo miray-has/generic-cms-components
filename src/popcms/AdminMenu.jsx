@@ -1,15 +1,13 @@
 ﻿import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faSave, faSignOutAlt, faSignInAlt, faPlus, faUpload, faSpinner, faFileImport, faImages } from '@fortawesome/free-solid-svg-icons'
 
-import { isUserLoggedIn } from './Index.jsx';
+import { isUserLoggedIn } from "./user/AccessToken.jsx";
 import PageSettingsOverlay from './components/PageSettingsOverlay.jsx';
 import PublishOverlay from './components/PublishOverlay.jsx';
 import AddPageOverlay from './components/AddPageOverlay.jsx';
-
-import { Overlay } from 'generic-cms-components';
+import Overlay from '../_common/_overlay.jsx';
 
 export default function AdminMenu(props) {
 	const [pageSettingsVisible, setPageSettingsVisible] = useState(false);
@@ -37,8 +35,8 @@ export default function AdminMenu(props) {
 			<ul>
 				{!isAuthenticated &&
 					<li>
-					<form>
-						<Link className="btn btn-primary" to='/login/' id="login" title="Sign in"><FontAwesomeIcon icon={faSignInAlt} /></Link>
+						<form>
+							<Link className="btn btn-primary" to='/login/' id="login" title="Sign in"><FontAwesomeIcon icon={faSignInAlt} /></Link>
 						</form>
 					</li>
 				}
@@ -65,14 +63,14 @@ export default function AdminMenu(props) {
 								onSave={props.onSaveNewPage}
 								onHide={() => setNewPageVisible(false)} />
 						</li>
-						<li> 
-						<Link to="/admin/media/" ><button className="btn btn-primary"><FontAwesomeIcon icon={faImages} /></button></Link>
+						<li>
+							<Link to="/admin/media/" ><button className="btn btn-primary"><FontAwesomeIcon icon={faImages} /></button></Link>
 						</li>
 						<li>
 							<button className="btn btn-primary" onClick={() => setPublishOverlayVisible(true)}><FontAwesomeIcon icon={faUpload} /></button>
-								<PublishOverlay
-									isVisible={publishOverlayVisible}
-									onHide={() => setPublishOverlayVisible(false)} />
+							<PublishOverlay
+								isVisible={publishOverlayVisible}
+								onHide={() => setPublishOverlayVisible(false)} />
 						</li>
 
 						<li>

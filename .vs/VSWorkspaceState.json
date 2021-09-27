@@ -3,9 +3,8 @@
     "",
     "\\lib",
     "\\src",
-    "\\src\\uiElements",
-    "\\src\\_common"
+    "\\src\\popcms"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\popcms\\Index.jsx",
   "PreviewInSolutionExplorer": false
 }

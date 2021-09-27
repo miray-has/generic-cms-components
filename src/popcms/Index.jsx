@@ -1,88 +1,33 @@
 ﻿import { useEffect, useState } from 'react';
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import AdminMenu from "./AdminMenu.jsx";
 import AdminContentBlockMenu from './AdminContentBlockMenu.jsx';
-import { msalInstance } from './Authentication.jsx';
-import { loginRequest } from './../auth/authProvider.jsx';
+import { getMsalInstance } from './Authentication.jsx';
 
-import Layout from '../Layout.jsx';
-import PageItem from '../uiElements/PageItem.jsx';
 import { Helmet } from 'react-helmet';
-import { GetServerUrl } from './ClientServerDataResolver.jsx';
-
-export function isHostACmsHostName() {
-	if (typeof (window) === "undefined" || window === null || window.location == null) {
-		return false;
-	}
-	let host = window.location.host;
-	return (host === "localhost:44320" ||
-		host === "cms.eastpoint.co.uk"
-		|| host === "eastpoint-2021.azurewebsites.net")
-}
-
-export async function GetUserAccessToken() {
-
-	if (typeof (window) === "undefined" || window === null || window.location == null) {
-		return false;
-	}
-
-	if (typeof (msalInstance) === "undefined" || msalInstance === null) {
-		return false;
-	}
-
-	const accounts = msalInstance.getAllAccounts();
-
-	if (accounts === null || accounts.length === 0) {
-		return false;
-	}
-
-	const account = accounts[0];
-
-	if (account == null) {
-		return false;
-	}
-
-	const accessTokenRequest = {
-		...loginRequest,
-		account: account
-	}
-
-	var tokenResponse = await msalInstance.acquireTokenSilent(accessTokenRequest);
-
-	return tokenResponse.accessToken;
-
-}
-
-export async function isUserLoggedIn() {
-
-	var accessToken = await GetUserAccessToken();
-
-	if (accessToken)
-		return true;
-	else
-		return false;
-	
-}
+import { getCmsHostName, isHostACmsHostName } from "./Host/CmsHostName.jsx";
+import { GetUserAccessToken, isUserLoggedIn } from "./user/AccessToken.jsx";
 
 function PageItemList(props) {
 	return (
 		<section id="page-content">
-			{props.items.map(x => <PageItem
+			{props.items.map(x => <props.pageItem
 				key={`page${props.url}-item${x.name}`}
 				item={x}
 				listsContent={props.listsContent}
 				isAdmin={props.isAdmin}
-				pageUrl={ props.url }
+				pageUrl={props.url}
 				handleElementChange={props.handleElementChange}
 				settings={props.settings}
-		/>)}
+			/>)}
 		</section>
 	);
 }
 
 function AdminPageItem(props) {
-	const [state, setState] = useState({optionsMenuOpen: false});
+	const [state, setState] = useState({ optionsMenuOpen: false });
 
 	const onOptionsButtonPress = function () {
 		setState({ ...state, optionsMenuOpen: true });
@@ -105,8 +50,10 @@ function AdminPageItem(props) {
 				onDelete={props.removeElementAtIndex}
 				onOpenOptions={onOptionsButtonPress}
 				onMoveUp={props.moveUpElementAtIndex}
-				onMoveDown={props.moveDownElementAtIndex} />
-			<PageItem
+				onMoveDown={props.moveDownElementAtIndex}
+				pageItemOptions={props.pageItemOptions}
+			/>
+			<props.pageItem
 				optionsMenuOpen={state.optionsMenuOpen}
 				onOptionsChange={onOptionsChange}
 				onOptionsHide={onOptionsHide}
@@ -141,6 +88,8 @@ function AdminPageItemList(props) {
 					moveUpElementAtIndex={props.moveUpElementAtIndex}
 					moveDownElementAtIndex={props.moveDownElementAtIndex}
 					settings={props.settings}
+					pageItem={props.pageItem}
+					pageItemOptions={props.pageItemOptions}
 				/>
 			))}
 		</section>
@@ -187,8 +136,17 @@ export default function Admin(props) {
 			setPageSettings(props.page);
 		}
 
+		isHostACmsHostName()
+			.then(x => {
+				console.log("popcms", "isHostACmsHostName", x);
+				setIsCms(x);
+			})
+
 		isUserLoggedIn()
-			.then(x => setIsUserLoggedInToCms(x));
+			.then(x => {
+				console.log("popcms", "isUserLoggedIn", x);
+				setIsUserLoggedInToCms(x)
+			});
 
 	}, [props.page]);
 
@@ -217,7 +175,7 @@ export default function Admin(props) {
 				}
 			});
 		}
-		
+
 	}, [pageSettings]);
 
 	function updateContentItems(newItems) {
@@ -240,7 +198,7 @@ export default function Admin(props) {
 		};
 	}
 
-	function addElementAtIndex(index, type) {		
+	function addElementAtIndex(index, type) {
 		var newArray = insertIntoArrayAtIndex([...pageSettings.content.items], index, newElementOfType(type));
 		updateContentItems(newArray);
 	}
@@ -318,7 +276,7 @@ export default function Admin(props) {
 		});
 	}
 
-	
+
 	async function onSave(_pageSettings, successCallback) {
 
 		if (isSaving) {
@@ -330,7 +288,10 @@ export default function Admin(props) {
 		var accessToken = await GetUserAccessToken();
 
 		var bearer = "Bearer " + accessToken;
-		fetch(GetServerUrl() + "/api/save/", {
+
+		var cmsHostName = await getCmsHostName();
+
+		fetch("https://" + cmsHostName + "/api/save/", {
 			method: 'POST', // or 'PUT'
 			headers: {
 				'Content-Type': 'application/json',
@@ -366,59 +327,55 @@ export default function Admin(props) {
 			content: { ...pageSettings.content, items: JSON.stringify(pageSettings.content.items) }
 		};
 		onSave(_pageSettings);
+
 	}
 
 	function onSettingsChange(newSettings) {
 		setPageSettings({ ...pageSettings, settings: newSettings });
 	}
 
-	if (typeof(window) !== "undefined") {
+	if (typeof (window) !== "undefined") {
 		useEffect(() => {
-			setTimeout(() => {
-				
-					let host = window.location.host;
-				if (host === "localhost:44320" ||
-					window.location.host === "cms.eastpoint.co.uk"
-						|| window.location.host === "eastpoint-2021.azurewebsites.net")
-					{
-						//setIsCms(true)
-					}
-					else
-					{
-						console.log(`Runnng on ${host}`);
-					}
-				
+			setTimeout(async () => {
+				if (await isHostACmsHostName()) {
+					setIsCms(true)
+				}
+
 			}, 100)
 		}, []);
 	}
 
 	function onLogoutPressed() {
-		msalInstance.logout();
-		setIsCms(false);
+		getMsalInstance()
+			.then(x => {
+				x.logoutPopup();
+				setIsCms(false);
+			});
 	}
 
 	return (
-		<Layout pageCssClass={pageSettings.settings?.pageCssClass}>
+		<props.layout pageCssClass={pageSettings.settings?.pageCssClass}>
 			<>
-				{ (typeof (window) !== "undefined") && pageSettings.settings &&
+				{(typeof (window) !== "undefined") && pageSettings.settings &&
 					<Helmet>
 						<title>{pageSettings.settings.title}</title>
 						<meta name="description" content={pageSettings.settings.description} />
 						<meta name="keywords" content={pageSettings.settings.keywords} />
 						<meta name="author" content={pageSettings.settings.author} />
 						<meta name="image" property="og:image" content={pageSettings.settings.imageUrl} />
-						<link rel="alternate" hreflang="en" href={ `https://www.eastpoint.co.uk${pageSettings.pageUrl}` } />
+						<link rel="alternate" hreflang="en" href={`https://www.eastpoint.co.uk${pageSettings.pageUrl}`} />
 						<link rel="canonical" href={`https://www.eastpoint.co.uk${pageSettings.pageUrl}`} />
 					</Helmet>
 				}
-			{
-				(!isCms || !isUserLoggedInToCms) && pageSettings.content.items &&
+				{
+					(!isCms || !isUserLoggedInToCms) && pageSettings.content.items &&
 					<PageItemList
 						url={pageSettings.pageUrl}
 						items={pageSettings.content.items}
 						listsContent={pageSettings.listsContent}
 						isAdmin={false}
 						settings={pageSettings}
+						pageItem={props.pageItem}
 					/>
 				}
 				{
@@ -426,31 +383,38 @@ export default function Admin(props) {
 					<>
 						{isUserLoggedInToCms &&
 							<AdminPageItemList
-							settings={pageSettings}
-							url={pageSettings.pageUrl}
-							items={pageSettings.content.items}
-							isAdmin={true}
-							handleElementChange={handleElementChange}
-							onOptionsChange={onOptionsChange}
-							addElementAtIndex={addElementAtIndex}
-							removeElementAtIndex={removeElementAtIndex}
-							moveUpElementAtIndex={moveUpElementAtIndex}
-							moveDownElementAtIndex={moveDownElementAtIndex}
-							listsContent={pageSettings.listsContent}
+								settings={pageSettings}
+								url={pageSettings.pageUrl}
+								items={pageSettings.content.items}
+								isAdmin={true}
+								handleElementChange={handleElementChange}
+								onOptionsChange={onOptionsChange}
+								addElementAtIndex={addElementAtIndex}
+								removeElementAtIndex={removeElementAtIndex}
+								moveUpElementAtIndex={moveUpElementAtIndex}
+								moveDownElementAtIndex={moveDownElementAtIndex}
+								listsContent={pageSettings.listsContent}
+								pageItem={props.pageItem}
+								pageItemOptions={props.pageItemOptions}
 							/>
 						}
 						<AdminMenu
 							settings={pageSettings}
 							onSettingsChange={onSettingsChange}
-							onLogoutPressed={ onLogoutPressed }
+							onLogoutPressed={onLogoutPressed}
 							onSaveCurrentPage={handleSave}
 							onSaveNewPage={onSave}
 							isSaving={isSaving} />
 					</>
 				}
 			</>
-		</Layout>
+		</props.layout>
 	);
 
 
 }
+
+Admin.propTypes = {
+	layout: PropTypes.func.isRequired,
+	pageItem: PropTypes.func.isRequired
+};

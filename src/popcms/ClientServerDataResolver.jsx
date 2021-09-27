@@ -1,5 +1,8 @@
 ﻿import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { getCmsHostName } from './Host/CmsHostName.jsx';
 import Admin from './Index.jsx';
 
 export default function ClientServerDataResolver(props) {
@@ -65,57 +68,42 @@ export default function ClientServerDataResolver(props) {
 	}
 
 	function loadPageContent() {
-		const url = GetServerUrl() + location.pathname;
-		fetch(url, {
-			method: 'GET', // or 'PUT'
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json',
-			}
-		})
-		.then(response => response.json())
-		.then(data => {
-			console.debug(`Success downloading: ${url}`, data);
-			var newData = processServerValue(data);
-			console.debug("SettingState");
-			console.debug(newData);
-			setState(newData);
-		})
-		.catch((error) => {
-			setState({ error: JSON.stringify(error, null, 4) });
-			console.error('Error:', error);
-		});
 
+		getCmsHostName()
+			.then(cmsHostName => {
+
+				const url = "https://" + cmsHostName + location.pathname;
+				fetch(url, {
+					method: 'GET', // or 'PUT'
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+					}
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.debug(`Success downloading: ${url}`, data);
+						var newData = processServerValue(data);
+						console.debug("SettingState");
+						console.debug(newData);
+						setState(newData);
+					})
+					.catch((error) => {
+						setState({ error: JSON.stringify(error, null, 4) });
+						console.error('Error:', error);
+					});
+			})
 	}
 
 	return (
 		<>
-			<Admin page={state} />
+			<Admin page={state} layout={props.layout} pageItem={props.pageItem} pageItemOptions={props.pageItemOptions} />
 		</>
 	);
 }
 
-export function GetServerUrl() {
-	if (typeof (window) !== "undefined" && window != null) {
-		var host = window.location.host;
-		if (host.indexOf(':') > 0) {
-			host = host.substring(0, host.indexOf(':'));
-		}
-		if (host.indexOf('.') > 0) {
-			host = host.substring(0, host.indexOf('.'));
-		}
-		console.debug("running on " + host);
-		switch (host) {
-			case "localhost":
-			case "eastpoint-2021":
-			case "cms":
-			case "dev":
-			case "staging": {
-				// for the development env, or cms env, use the same server
-				return "";
-			}
-		}
-		// otherwise, we're on static hosting, so use the CMS
-		return "https://eastpoint-2021.azurewebsites.net";
-	}
-}
+ClientServerDataResolver.propTypes = {
+	layout: PropTypes.func.isRequired,
+	pageItem: PropTypes.func.isRequired,
+	pageItemOptions: PropTypes.array.isRequired
+};

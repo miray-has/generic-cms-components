@@ -1,7 +1,6 @@
-﻿import { useEffect, useState } from 'react';
-
-import { Overlay } from 'generic-cms-components';
-import { TextInput } from 'generic-cms-components';
+﻿import { useState } from 'react';
+import TextInput from '../../_common/TextInput.js';
+import Overlay from '../../_common/_overlay.jsx';
 
 export default function AddPageOverlay(props) {
 	const [newPage, setNewPage] = useState({ permalink: "/" });

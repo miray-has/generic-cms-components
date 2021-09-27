@@ -1,15 +1,16 @@
 ﻿import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle, faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
-import { PageItemOptions } from '../uiElements/PageItem.jsx';
 
 function AddElementAtIndexForm(props) {
 	const [dropdownOpen, setOpen] = useState(false);
 
 	const toggle = () => setOpen(!dropdownOpen);
 
-	const options = PageItemOptions;
+	const options = props.pageItemOptions;
 
 	function handleAddNew({ target }) {
 		props.onAddNew(props.index, target.name);
@@ -21,7 +22,7 @@ function AddElementAtIndexForm(props) {
 				<DropdownToggle><FontAwesomeIcon icon={faPlusCircle} /></DropdownToggle>
 				<DropdownMenu>
 					<DropdownItem header>Add item {props.header}</DropdownItem>
-					{options.map(o => { return <DropdownItem key={ o.typeName } onClick={handleAddNew} name={o.typeName}>{o.prettyName || o.typeName}</DropdownItem> })}
+					{options.map(o => { return <DropdownItem key={o.typeName} onClick={handleAddNew} name={o.typeName}>{o.prettyName || o.typeName}</DropdownItem> })}
 				</DropdownMenu>
 			</ButtonDropdown>
 		</>
@@ -67,10 +68,14 @@ export default function AdminContentBlockMenu(props) {
 	return (
 		<>
 			<div className="popcms-block-admin">
-				<AddElementAtIndexForm onAddNew={props.onAddNew} index={props.index} header="above" />
-				<EditElementAtIndexForm onAddNew={props.onAddNew} onDelete={props.onDelete} onMoveUp={props.onMoveUp} onMoveDown={props.onMoveDown} onOpenOptions={ props.onOpenOptions } index={props.index}  />
-				<AddElementAtIndexForm onAddNew={props.onAddNew} index={props.index + 1} header="below" />
+				<AddElementAtIndexForm pageItemOptions={props.pageItemOptions} onAddNew={props.onAddNew} index={props.index} header="above" />
+				<EditElementAtIndexForm onAddNew={props.onAddNew} onDelete={props.onDelete} onMoveUp={props.onMoveUp} onMoveDown={props.onMoveDown} onOpenOptions={props.onOpenOptions} index={props.index} />
+				<AddElementAtIndexForm onAddNew={props.onAddNew} pageItemOptions={props.pageItemOptions} index={props.index + 1} header="below" />
 			</div>
 		</>
 	);
 }
+
+AddElementAtIndexForm.propTypes = {
+	pageItemOptions: PropTypes.array.isRequired
+};

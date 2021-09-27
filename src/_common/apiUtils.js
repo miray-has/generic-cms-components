@@ -1,5 +1,5 @@
-﻿import { loginRequest } from '../auth/authProvider.jsx';
-import { msalInstance } from '../popcms/Authentication.jsx';
+﻿import { GetUserAccessToken } from "../popcms/user/AccessToken.jsx"
+
 
 export async function getOptionsWithAuthHeader() {
 	const token = await authProvider.getIdToken();
@@ -21,41 +21,6 @@ export async function getOptionsWithAuthHeaderForAxiosUpload() {
 		//'Content-Type': 'application/json'
 	};
 }
-
-
-export async function GetUserAccessToken() {
-
-	if (typeof (window) === "undefined" || window === null || window.location == null) {
-		return false;
-	}
-
-	if (typeof (msalInstance) === "undefined" || msalInstance === null) {
-		return false;
-	}
-
-	const accounts = msalInstance.getAllAccounts();
-
-	if (accounts === null || accounts.length === 0) {
-		return false;
-	}
-
-	const account = accounts[0];
-
-	if (account == null) {
-		return false;
-	}
-
-	const accessTokenRequest = {
-		...loginRequest,
-		account: account
-	}
-
-	var tokenResponse = await msalInstance.acquireTokenSilent(accessTokenRequest);
-
-	return tokenResponse.accessToken;
-
-}
-
 
 export async function sendDataItemToUrl(url, item, successHandler, returnFullObject) {
 	var dataUrl = null;
@@ -119,10 +84,10 @@ export async function getDataFromCacheOrUrl(url) {
 			console.debug("Getting " + url + " FROM SERVER");
 			return fetch(url, await getOptionsWithAuthHeader())
 				.then(response => response.json())
-				.then(json => { 
+				.then(json => {
 					localStorage.setItem(url, JSON.stringify(json));
 					return json;
-				
+
 				})
 				.catch(handleError);
 		}
@@ -220,14 +185,12 @@ export function urlForSearch(startOfUrl, searchParams, keyPrefix) {
 		}
 	} else {
 		if (pagingUrl !== null) {
-			url +=  "?" + pagingUrl;
+			url += "?" + pagingUrl;
 		}
 	}
 
 	return url;
 }
-
-
 
 export async function handleErrorResponse(response, url) {
 	url = url || response.url;

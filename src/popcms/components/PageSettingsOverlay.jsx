@@ -1,14 +1,13 @@
 ﻿import { useEffect, useState } from 'react';
-
-import { Overlay } from 'generic-cms-components';
-import { TextInput } from 'generic-cms-components';
+import TextInput from '../../_common/TextInput.js';
+import Overlay from '../../_common/_overlay.jsx';
 
 export default function PageSettingsOverlay(props) {
-	const [state, setState] = useState(props.value);
+	const [state, setState] = useState(props.value.settings);
 
 	useEffect(() => {
-		if (props.value != null) {
-			setState(props.value);
+		if (props.value.settings != null) {
+			setState(props.value.settings);
 		}
 	}, [props.value]);
 

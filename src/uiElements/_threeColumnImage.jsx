@@ -1,9 +1,7 @@
 ﻿import { useState, useEffect } from 'react';
-import ImageContentInput from '../_common/_imageContentInput.jsx';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import ColumnImageWithText from './_columnImageWithText.jsx';
 
 export default function ThreeColumnContent(props) {
 
@@ -62,40 +60,6 @@ export default function ThreeColumnContent(props) {
 			<Options isVisible={props.optionsMenuOpen} options={props.options} onOptionsChange={props.onOptionsChange} onOptionsHide={props.onOptionsHide} />
 		</div>
 	);
-}
-
-function ColumnImageWithText(props) {
-
-	const [state, setState] = useState({
-		header: props.value?.header,
-		subtext: props.value?.subtext,
-		imageUrl: props.value?.imageUrl
-	});
-
-	function onPropertyChange(name, value) {
-		var newValue = { ...state, [name]: value };
-		setState(newValue);
-		if (props.onChange) {
-			props.onChange(props.name, newValue);
-		}
-	}
-
-	function onChange({ target }) {
-		onPropertyChange(target.name, target.value);
-	}
-
-	return (
-		<div onClick={(e) => props.toLink(props.link, e)}>
-			<div>
-				<ImageContentInput
-					name="imageUrl"
-					isAdmin={props.isAdmin}
-					value={state.imageUrl}
-					onChange={onPropertyChange}
-				/>
-			</div>
-		</div>
-	)
 }
 
 function Options(props) {

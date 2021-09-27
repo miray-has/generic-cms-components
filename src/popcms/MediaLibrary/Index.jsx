@@ -1,18 +1,13 @@
-﻿import React, { useEffect, useState }from "react";
-import {
-	Switch,
-	Route,
-	useRouteMatch,
-    withRouter
-} from "react-router-dom";
-import { GetServerUrl } from './../ClientServerDataResolver.jsx';
-import { GetUserAccessToken } from "../Index.jsx";
-import QueryString from 'query-string';
-import Layout from '../../Layout.jsx';
-import AddMediaOverlay from './../components/AddMediaOverlay.jsx';
+﻿import React, { useEffect, useState } from "react";
+import { Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
+import PropTypes from 'prop-types';
+import TextInput from '../../_common/TextInput.js';
+import OptimisedImage from '../../_common/_optimisedImage.jsx';
 
-import { TextInput } from 'generic-cms-components';
-import { OptimisedImage } from 'generic-cms-components';
+import QueryString from 'query-string';
+import AddMediaOverlay from './../components/AddMediaOverlay.jsx';
+import { GetUserAccessToken } from '../user/AccessToken.jsx';
+import { getCmsHostName } from "../Host/CmsHostName.jsx";
 
 function MediaLibrary(props) {
 	const [isRunningClientSite, setIsRunningClientSite] = useState([]);
@@ -37,8 +32,8 @@ function MediaLibrary(props) {
 	return (
 		<>
 			{isRunningClientSite &&
-				<Layout>
-					<section id="media-library">	
+				<props.layout>
+					<section id="media-library">
 						<h1>Media</h1>
 						<Switch>
 							<Route path={`${routeMatch.path}edit/`}>
@@ -46,17 +41,17 @@ function MediaLibrary(props) {
 									onSave={onSave}
 									onCancel={onExitEdit}
 									location={props.location}
-									/>
-								</Route>
+								/>
+							</Route>
 							<Route path={routeMatch.path}>
 								<FileList
-									onEdit={ onEdit }
+									onEdit={onEdit}
 								/>
 							</Route>
 						</Switch>
 					</section>
-				</Layout>
-				}
+				</props.layout>
+			}
 		</>
 	);
 }
@@ -92,42 +87,42 @@ function FileList(props) {
 			<section id="media-library-list">
 				<div className="buttons">
 					<button onClick={() => setMediaOverlayVisible(true)}>upload</button>
-						<AddMediaOverlay
-							isVisible={mediaOverlayVisible}
-							onHide={() => setMediaOverlayVisible(false)}
-							onComplete={() => { onRefreshFileList(); setMediaOverlayVisible(false); }}
-							value={props.settings}
+					<AddMediaOverlay
+						isVisible={mediaOverlayVisible}
+						onHide={() => setMediaOverlayVisible(false)}
+						onComplete={() => { onRefreshFileList(); setMediaOverlayVisible(false); }}
+						value={props.settings}
 						onChange={props.onSettingsChange} />
-					<button onClick={onRefreshFileList }>refresh</button>
+					<button onClick={onRefreshFileList}>refresh</button>
 				</div>
 
 				<div className="space"></div>
-					<div className="row">
-						{files.map(f => {
-							return (
-								<div key={f.uri} className="col-md-4">
-									{parseInt(f.type) === 0 &&
-										<OptimisedImage
-											uri={f.uri}
-											description={f.description}
-											width={f.width}
-											height={f.height}
-										/>
-										
-									}
-									<div className="image-information">
-										<b>{f.name}</b><br />
-										{f.description}<br />
-										Url: {f.uri}<br />
-										Copyright: {f.copyright}<br />
-										Native width: {f.width}px<br />
-										<button onClick={props.onEdit} name={f.name} target="_blank" className="btn btn-primary" >Edit</button><br />
-									</div>
+				<div className="row">
+					{files.map(f => {
+						return (
+							<div key={f.uri} className="col-md-4">
+								{parseInt(f.type) === 0 &&
+									<OptimisedImage
+										uri={f.uri}
+										description={f.description}
+										width={f.width}
+										height={f.height}
+									/>
+
+								}
+								<div className="image-information">
+									<b>{f.name}</b><br />
+									{f.description}<br />
+									Url: {f.uri}<br />
+									Copyright: {f.copyright}<br />
+									Native width: {f.width}px<br />
+									<button onClick={props.onEdit} name={f.name} target="_blank" className="btn btn-primary" >Edit</button><br />
 								</div>
-							);
-						})}
+							</div>
+						);
+					})}
 				</div>
-			</section> 
+			</section>
 		</>
 	);
 }
@@ -203,8 +198,8 @@ export async function PerformSecureApiCall(url, method, data) {
 
 	if (token !== null) {
 		var bearer = "Bearer " + token;
-
-		var dataResponse = await fetch(GetServerUrl() + url, {
+		var cmsHostName = await getCmsHostName();
+		var dataResponse = await fetch("https://" + cmsHostName + url, {
 			method: method || 'GET', // or 'PUT'
 			headers: {
 				'Content-Type': 'application/json',
@@ -221,3 +216,7 @@ export async function PerformSecureApiCall(url, method, data) {
 }
 
 export default withRouter(MediaLibrary);
+
+MediaLibrary.propTypes = {
+	layout: PropTypes.func.isRequired
+};
