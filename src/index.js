@@ -2,7 +2,6 @@
 import ContactItem from "./uiElements/_contactItem.jsx";
 import Pagination from "./uiElements/_pagination.jsx";
 import Banner from "./uiElements/_banner.jsx";
-import BlogBanner from './uiElements/_blogBanner.jsx';
 import Button from "./uiElements/_button.jsx";
 import FaqComponent from "./uiElements/_faqComponent.jsx";
 import LogoComponent from "./uiElements/_logoComponent";
@@ -52,7 +51,6 @@ import ToggleNavOverlay from './popcms/components/ToggleNavOverlay.jsx';
 import { getCmsHostName } from './popcms/Host/CmsHostName.jsx';
 import { isHostACmsHostName } from './popcms/Host/CmsHostName.jsx';
 
-
 //..MediaLibrary
 import MediaLibrary from './popcms/MediaLibrary/Index.jsx';
 
@@ -61,7 +59,7 @@ import { GetUserAccessToken } from './popcms/user/AccessToken.jsx';
 import { isUserLoggedIn } from './popcms/user/AccessToken.jsx';
 
 //uiElements
-export { ContactItem, Pagination, Banner, BlogBanner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
+export { ContactItem, Pagination, Banner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
 //_common
 export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, EditableInput, EditableTextarea, ScrollToTop };
 //auth 
