@@ -217,6 +217,3 @@ export async function PerformSecureApiCall(url, method, data) {
 
 export default withRouter(MediaLibrary);
 
-MediaLibrary.propTypes = {
-	layout: PropTypes.func.isRequired
-};

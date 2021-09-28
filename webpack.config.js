@@ -3,6 +3,7 @@
 module.exports = {
     mode: 'production',
     entry: './src/index.js',
+    performance: { hints: false },
     output: {
         path: path.resolve('lib'),
         filename: 'index.js',

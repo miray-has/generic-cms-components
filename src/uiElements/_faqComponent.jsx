@@ -111,8 +111,6 @@ function FaqComponentItem(props) {
 	)
 }
 
-
-
 function Options(props) {
 	const [state, setState] = useState(props.options || { layout: null });
 

@@ -3,7 +3,6 @@ import { GenericProvider } from './_genericContext.jsx';
 import TagNav from './_tagNav.jsx';
 import PropTypes from 'prop-types';
 
-
 export default function GenericContentList(props) {
 	return (
 		<> 

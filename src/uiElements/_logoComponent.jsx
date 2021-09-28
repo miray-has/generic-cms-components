@@ -5,7 +5,6 @@ import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
 import Image from '../_common/_image.jsx';
 
-
 export default function LogoComponent(props) {
 
 	const [state, setState] = useState({

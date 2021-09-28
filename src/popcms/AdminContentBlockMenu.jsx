@@ -76,6 +76,6 @@ export default function AdminContentBlockMenu(props) {
 	);
 }
 
-AddElementAtIndexForm.propTypes = {
+AdminContentBlockMenu.propTypes = {
 	pageItemOptions: PropTypes.array.isRequired
 };

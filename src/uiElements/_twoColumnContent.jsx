@@ -3,7 +3,6 @@ import TextContentInput from '../_common/_textContentInput.jsx';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
 
-
 export default function TwoColumnContent(props) {
 	const [state, setState] = useState({
 		col1: props.value.col1,
