@@ -2,6 +2,7 @@
 import ContactItem from "./uiElements/_contactItem.jsx";
 import Pagination from "./uiElements/_pagination.jsx";
 import Banner from "./uiElements/_banner.jsx";
+import BlogBanner from './uiElements/_blogBanner.jsx';
 import Button from "./uiElements/_button.jsx";
 import FaqComponent from "./uiElements/_faqComponent.jsx";
 import LogoComponent from "./uiElements/_logoComponent";
@@ -28,6 +29,7 @@ import TagNav from "./_common/_tagNav.jsx";
 import OptimisedImage from "./_common/_optimisedImage.jsx";
 import EditableInput from "./_common/_editableInput.jsx";
 import EditableTextarea from "./_common/_editableTextarea.jsx";
+import ScrollToTop from './_common/_scrollToTop.jsx';
 
 //auth
 import * as authProvider from './auth/authProvider.jsx';
@@ -47,18 +49,21 @@ import PublishOverlay from './popcms/components/PublishOverlay.jsx';
 import ToggleNavOverlay from './popcms/components/ToggleNavOverlay.jsx';
 
 //..Host
-import * as CmsHostName from './popcms/Host/CmsHostName.jsx';
+import { getCmsHostName } from './popcms/Host/CmsHostName.jsx';
+import { isHostACmsHostName } from './popcms/Host/CmsHostName.jsx';
+
 
 //..MediaLibrary
 import MediaLibrary from './popcms/MediaLibrary/Index.jsx';
 
 //..user
-import * as AccessToken from './popcms/user/AccessToken.jsx';
+import { GetUserAccessToken } from './popcms/user/AccessToken.jsx';
+import { isUserLoggedIn } from './popcms/user/AccessToken.jsx';
 
 //uiElements
-export { ContactItem, Pagination, Banner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
+export { ContactItem, Pagination, Banner, BlogBanner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
 //_common
-export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, EditableInput, EditableTextarea };
+export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, EditableInput, EditableTextarea, ScrollToTop };
 //auth 
 export { authProvider };
 //popcms
@@ -66,9 +71,9 @@ export { AdminContentBlockMenu, AdminMenu, Authentication, ClientServerDataResol
     //..components
 export { AddMediaOverlay, AddPageOverlay, PageSettingsOverlay, PublishOverlay, ToggleNavOverlay };
     //..Host 
-export { CmsHostName };
+export { getCmsHostName, isHostACmsHostName };
     //..MediaLibrary
 export { MediaLibrary };
     //..user
-export { AccessToken };
+export { GetUserAccessToken, isUserLoggedIn };
 

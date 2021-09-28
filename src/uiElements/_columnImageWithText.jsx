@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ImageContentInput from '../_common/_imageContentInput.jsx';
+import PropTypes from 'prop-types';
 
 export default function ColumnImageWithText(props) {
 
@@ -63,3 +64,10 @@ export default function ColumnImageWithText(props) {
 	)
 }
 
+ColumnImageWithText.propTypes = {
+	imageUrl: PropTypes.string
+};
+
+ColumnImageWithText.defaultProps = {
+	imageUrl: '/'
+};
