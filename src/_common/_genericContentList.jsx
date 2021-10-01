@@ -17,7 +17,7 @@ export default function GenericContentList(props) {
 
 				{(items, tags, onTagSelected, handleFilter) => {
 					return (
-						<section id={props.containerid}>
+						<div id={props.containerid}>
 							<div>
 								<section>
 									<TagNav
@@ -31,7 +31,7 @@ export default function GenericContentList(props) {
 									}
 								</section>
 							</div>
-						</section>
+						</div>
 					);
 				}
 				}

@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from 'react';
 import TextInput from '../_common/TextInput.js';
 import Overlay from '../_common/_overlay.jsx';
-import ColumnImageWithText from './_columnImageWithText.jsx';
+import ColumnImage from './_columnImage.jsx';
 
 export default function ThreeColumnContent(props) {
 
@@ -31,7 +31,7 @@ export default function ThreeColumnContent(props) {
 	return (
 		<div className={cssClass()}>
 			<div className="three-column-content">
-				<ColumnImageWithText
+				<ColumnImage
 					name="col1"
 					isAdmin={props.isAdmin}
 					value={state.col1}
@@ -40,7 +40,7 @@ export default function ThreeColumnContent(props) {
 					link={props.col1Link}
 					toLink={props.toLink}
 				/>
-				<ColumnImageWithText
+				<ColumnImage
 					name="col2"
 					isAdmin={props.isAdmin}
 					value={state.col2}
@@ -48,7 +48,7 @@ export default function ThreeColumnContent(props) {
 					link={props.col2Link}
 					toLink={props.toLink}
 				/>
-				<ColumnImageWithText
+				<ColumnImage
 					name="col3"
 					isAdmin={props.isAdmin}
 					value={state.col3}

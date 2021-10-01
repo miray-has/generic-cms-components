@@ -27,30 +27,34 @@ export default function BlogBanner(props) {
 	}
 
 	return (
-		<div className="banner blog-banner">
-			<div className={cssClass()}>
-				<div>
-				<EditableTextarea
-					name="title"
-					value={state.title}
-					isAdmin={props.isAdmin}
-					onChange={onChange}
-				/></div>
-				{window.location.pathname.includes('/blog') &&
-					<p>
-						By {props.settings?.settings.author && props.settings.settings.author}
-						, {props.settings?.updatedDateTime && date}
+		<>
+			<div className="banner blog-banner">
+				<div className={cssClass()}>
+					<div>
+					<EditableTextarea
+						name="title"
+						value={state.title}
+						isAdmin={props.isAdmin}
+						onChange={onChange}
+					/>
+					</div>
+					{window.location.pathname.includes('/blog') &&
+						<p>
+							By {props.settings?.settings.author && props.settings.settings.author}
+							, {props.settings?.updatedDateTime && date}
 
-					</p>
-				}
-				{window.location.pathname.includes('/case-studies') &&
-					<p>
-						<span>Case studies</span> / {props.settings?.settings.title}
-					</p>
-				}
+						</p>
+					}
+					{window.location.pathname.includes('/case-studies') &&
+						<p>
+							<span>Case studies</span> / {props.settings?.settings.title}
+						</p>
+					}
+				</div>
 			</div>
 			<Options isVisible={props.optionsMenuOpen} options={props.options} onOptionsChange={props.onOptionsChange} onOptionsHide={props.onOptionsHide} />
-		</div>);
+		</>
+	);
 }
 
 function Options(props) {

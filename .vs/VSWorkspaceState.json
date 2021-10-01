@@ -3,8 +3,9 @@
     "",
     "\\lib",
     "\\src",
+    "\\src\\auth",
     "\\src\\popcms"
   ],
-  "SelectedNode": "\\src\\popcms\\Index.jsx",
+  "SelectedNode": "\\src\\auth\\authConfig.jsx",
   "PreviewInSolutionExplorer": false
 }

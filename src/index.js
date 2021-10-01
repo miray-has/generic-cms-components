@@ -14,6 +14,7 @@ import OneColumnWideImage from "./uiElements/_oneColumnWideImage.jsx";
 import ThreeColumnImage from "./uiElements/_threeColumnImage.jsx";
 import OneColumnAndOneImage from "./uiElements/_oneColumnAndOneImage.jsx";
 import TwoColumnImageWithText from "./uiElements/_twoColumnImageWithText.jsx";
+import BlogBanner from './uiElements/_blogBanner.jsx';
 
 //_common
 import GenericContentList from "./_common/_genericContentList.jsx";
@@ -59,7 +60,7 @@ import { GetUserAccessToken } from './popcms/user/AccessToken.jsx';
 import { isUserLoggedIn } from './popcms/user/AccessToken.jsx';
 
 //uiElements
-export { ContactItem, Pagination, Banner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
+export { ContactItem, Pagination, Banner, BlogBanner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
 //_common
 export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, EditableInput, EditableTextarea, ScrollToTop };
 //auth 
