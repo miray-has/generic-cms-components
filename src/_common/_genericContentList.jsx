@@ -4,14 +4,13 @@ import TagNav from './_tagNav.jsx';
 import PropTypes from 'prop-types';
 
 export default function GenericContentList(props) {
-	const [teaserCard, setTeaserCard] = useState(props.cssClass || '');
 	const [className, setClassName] = useState(listClass() || '');
 
 	function listClass() {
 		if (props.cssClass === 'teaser-link-cards') {
 			return props.cssClass;
 		} else {
-			return `${(props.containerid)} ${typeof (props.cssClass) != "undefined" ? props.cssClass : ""}`;
+			return props.containerid;
         }
     }
 
@@ -27,8 +26,8 @@ export default function GenericContentList(props) {
 
 				{(items, tags, onTagSelected, handleFilter) => {
 					return (
-						<div id={teaserCard}>
-							<div className={teaserCard}>
+						<div id={className}>
+							<div className={className}>
 								<section>
 									{props.cssClass !== 'teaser-link-cards' &&
 										<TagNav
