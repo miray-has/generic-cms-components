@@ -154,5 +154,6 @@ export const GenericProvider = (props) => {
 
 GenericProvider.propTypes = {
 	primaryTag: PropTypes.string.isRequired,
-	tags: PropTypes.string
+	tags: PropTypes.string,
+	data: PropTypes.data
 };

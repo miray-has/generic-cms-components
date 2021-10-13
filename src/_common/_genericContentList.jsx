@@ -11,7 +11,7 @@ export default function GenericContentList(props) {
 		if (props.cssClass === 'teaser-link-cards') {
 			return props.cssClass;
 		} else {
-			return props.containerid;
+			return `${(props.containerid)} ${typeof (props.cssClass) != "undefined" ? props.cssClass : ""}`;
         }
     }
 
@@ -27,7 +27,7 @@ export default function GenericContentList(props) {
 
 				{(items, tags, onTagSelected, handleFilter) => {
 					return (
-						<div id={className}>
+						<div id={teaserCard}>
 							<div className={teaserCard}>
 								<section>
 									{props.cssClass !== 'teaser-link-cards' &&
@@ -55,6 +55,6 @@ export default function GenericContentList(props) {
 GenericContentList.propTypes = {
 	selectedTag: PropTypes.string,
 	tags: PropTypes.array,
-	showCaseValue: PropTypes.string
-
+	showCaseValue: PropTypes.string,
+	data: PropTypes.array
 }

@@ -1,8 +1,8 @@
 ﻿import { useEffect, useState } from 'react';
-import { useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import AdminMenu from "./AdminMenu.jsx";
+import AdminMenu from './AdminMenu.jsx';
 import AdminContentBlockMenu from './AdminContentBlockMenu.jsx';
 import { getMsalInstance } from './Authentication.jsx';
 
