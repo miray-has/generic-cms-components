@@ -1,6 +1,5 @@
 ﻿//uiElements
 import ContactItem from "./uiElements/_contactItem.jsx";
-import Pagination from "./uiElements/_pagination.jsx";
 import Banner from "./uiElements/_banner.jsx";
 import Button from "./uiElements/_button.jsx";
 import FaqComponent from "./uiElements/_faqComponent.jsx";
@@ -60,7 +59,7 @@ import { GetUserAccessToken } from './popcms/user/AccessToken.jsx';
 import { isUserLoggedIn } from './popcms/user/AccessToken.jsx';
 
 //uiElements
-export { ContactItem, Pagination, Banner, BlogBanner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
+export { ContactItem, Banner, BlogBanner, Button, FaqComponent, LogoComponent, InternalLink, OneColumnAndOneImage, TwoColumnImageWithText, OneColumnContent, ThreeColumnContent, TwoColumnContent, OneColumnWideImage, ThreeColumnImage, ColumnImageWithText };
 //_common
 export { GenericContentList, GenericProvider, Overlay, TextInput, TextContentEditor, Image, ImageContentInput, TagLink, TagNav, OptimisedImage, EditableInput, EditableTextarea, ScrollToTop };
 //auth 

@@ -1,6 +1,7 @@
 ﻿import { useEffect, useState } from 'react';
-import { TextInput, Overlay } from 'generic-cms-components';
-import { EditableTextarea } from 'generic-cms-components';
+import Overlay from '../_common/_overlay.jsx';
+import TextInput from '../_common/TextInput.js';
+import EditableTextarea from '../_common/_editableTextarea.jsx';
 import * as moment from 'moment';
 
 export default function BlogBanner(props) {

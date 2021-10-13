@@ -30,7 +30,7 @@ export const GenericProvider = (props) => {
 	function serverTags() {
 		if (!props.data['all']) {
 			return [];
-		}
+		} 
 
 		const data = JSON.parse(props.data['all']);
 		var relevantData = [];
