@@ -13,7 +13,11 @@ export const GenericProvider = (props) => {
 	function serverData() {
 		if (!props.data['all']) {
 			return [];
-        }
+		}
+
+		//if (props.numberOfItems != null || parseInt(props.numberOfItems) > 0) {
+		//	setItems(json.slice(0, (props.numberOfItems)));
+		//} else setItems(json);
 
 		const data = JSON.parse(props.data['all']);
 		var relevantData = [];

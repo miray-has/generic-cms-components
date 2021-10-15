@@ -31,37 +31,50 @@ export default function TagNav(props) {
 	}
 
 	return (
-		<React.Fragment>
-		<nav id="tag-nav">
-			<ul>
+		<>
+			{props.cssClass !== 'teaser-link-cards' &&
 
-				{
-					(props.tags.length > 0) &&
-						<React.Fragment>
-							<li><button onClick={onTagSelectedAll} className={showAllClassName}>All Categories</button></li>
-						</React.Fragment>
-				}
+				<nav id="tag-nav">
+					<ul>
 
-				{
-					props.tags != null && props.tags.map(tag => {
-						let className = ""
-						if (props.selectedTag === tag) {
-							className = "active"
+						{
+							(props.tags.length > 0) &&
+							<>
+								<li><button onClick={onTagSelectedAll} className={showAllClassName}>All Categories</button></li>
+							</>
 						}
-						return <TagLink onTagSelected={props.onTagSelected} tagClicked={tempTag => setTempTag(tempTag)} key={tag} tag={tag} className={className} />
-					})
-				}
-			</ul>
-			</nav>
 
-			{
-				(props.showCaseValue) &&
-				<React.Fragment>
-					<div id="filterShowCase">{props.showCaseValue} | {showCaseTag}</div> 
-				</React.Fragment>
+						{
+							props.tags != null && props.tags.map(tag => {
+								let className = ""
+								if (props.selectedTag === tag) {
+									className = "active"
+								}
+								return <TagLink onTagSelected={props.onTagSelected} tagClicked={tempTag => setTempTag(tempTag)} key={tag} tag={tag} className={className} />
+							})
+						}
+					</ul>
+				</nav>
 			}
 
-		</React.Fragment>
+			{
+				props.cssClass !== 'teaser-link-cards' && props.showCaseValue &&
+				<>
+					<div id="filterShowCase">{props.showCaseValue} | {showCaseTag}</div> 
+				</>
+			}
+
+			{
+				props.cssClass === 'teaser-link-cards' && props.showCaseValue &&
+				<>
+					<div id="filterShowCase">
+						<div>{props.showCaseValue}</div>
+						<div><u>{props.seeAllLink}</u></div>
+					</div>
+				</>
+			}
+
+		</>
 	);
 
 }
@@ -71,4 +84,6 @@ TagNav.propTypes = {
 	selectedTag: PropTypes.string,
 	tags: PropTypes.array,
 	showCaseValue: PropTypes.string,
+	cssClass: PropTypes.string,
+	seeAllLink: PropTypes.func
 };

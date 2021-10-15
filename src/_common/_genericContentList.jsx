@@ -7,7 +7,7 @@ export default function GenericContentList(props) {
 	const [className, setClassName] = useState(listClass() || '');
 
 	function listClass() {
-		if (props.cssClass === 'teaser-link-cards') {
+		if (props.options.cssClass === 'teaser-link-cards') {
 			return props.cssClass;
 		} else {
 			return props.containerid;
@@ -29,14 +29,15 @@ export default function GenericContentList(props) {
 						<div id={className}>
 							<div className={className}>
 								<section>
-									{props.cssClass !== 'teaser-link-cards' &&
-										<TagNav
-											selectedTag={props.tag}
-											tags={tags}
-											onTagSelected={onTagSelected}
-											showCaseValue={props.showCaseValue}
-										/>
-									}
+									<TagNav
+										selectedTag={props.tag}
+										tags={tags}
+										onTagSelected={onTagSelected}
+										showCaseValue={props.showCaseValue}
+										cssClass={props.cssClass}
+										seeAllLink={props.seeAllLink}
+									/>
+
 									{
 										props.children(items, handleFilter)
 									}
@@ -55,5 +56,6 @@ GenericContentList.propTypes = {
 	selectedTag: PropTypes.string,
 	tags: PropTypes.array,
 	showCaseValue: PropTypes.string,
-	data: PropTypes.array
+	data: PropTypes.array,
+	seeAllLink: PropTypes.func
 }
