@@ -65,7 +65,10 @@ export default function AdminMenu(props) {
 						</li>
 						<li>
 							<Link to="/admin/media/" ><button className="btn btn-primary"><FontAwesomeIcon icon={faImages} /></button></Link>
-						</li>
+					</li>
+					<li>
+						<Link to="/admin/orders/" ><button className="btn btn-primary"><FontAwesomeIcon icon={faImages} /></button></Link>
+					</li>
 						<li>
 							<button className="btn btn-primary" onClick={() => setPublishOverlayVisible(true)}><FontAwesomeIcon icon={faUpload} /></button>
 							<PublishOverlay

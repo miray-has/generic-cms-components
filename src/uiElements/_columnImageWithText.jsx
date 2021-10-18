@@ -35,6 +35,7 @@ export default function ColumnImageWithText(props) {
 					isAdmin={props.isAdmin}
 					value={state.imageUrl}
 					onChange={onPropertyChange}
+					rows={10}
 				/>
 				<div>
 					{props.isAdmin &&

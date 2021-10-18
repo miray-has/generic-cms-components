@@ -1,6 +1,6 @@
 {
   "name": "generic-cms-components",
-  "version": "1.2.22",
+  "version": "1.2.23",
   "description": "Generic react components for cms websites",
   "main": "./lib/index.js",
   "license": "MIT",
@@ -47,6 +47,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@tinymce/tinymce-react": "^3.12.6",
     "axios": "^0.21.1",
+    "moment": "^2.29.1",
     "query-string": "^7.0.1",
     "react-helmet": "^6.1.0",
     "reactstrap": "^8.9.0"

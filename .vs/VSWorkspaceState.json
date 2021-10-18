@@ -3,9 +3,9 @@
     "",
     "\\lib",
     "\\src",
-    "\\src\\auth",
-    "\\src\\popcms"
+    "\\src\\popcms",
+    "\\src\\uiElements"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\uiElements\\_columnImageWithText.jsx",
   "PreviewInSolutionExplorer": false
 }
