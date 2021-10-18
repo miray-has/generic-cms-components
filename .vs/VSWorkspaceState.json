@@ -3,9 +3,8 @@
     "",
     "\\lib",
     "\\src",
-    "\\src\\popcms",
-    "\\src\\uiElements"
+    "\\src\\popcms"
   ],
-  "SelectedNode": "\\src\\uiElements\\_columnImageWithText.jsx",
+  "SelectedNode": "\\src\\popcms\\AdminMenu.jsx",
   "PreviewInSolutionExplorer": false
 }

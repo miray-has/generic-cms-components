@@ -13,7 +13,7 @@ import { GetUserAccessToken, isUserLoggedIn } from "./user/AccessToken.jsx";
 function PageItemList(props) {
 	return (
 		<section id="page-content">
-			{props.items.map(x => <props.pageItem
+			{props.items && props.items.map(x => <props.pageItem
 				key={`page${props.url}-item${x.name}`}
 				item={x}
 				listsContent={props.listsContent}

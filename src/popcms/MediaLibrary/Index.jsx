@@ -98,7 +98,7 @@ function FileList(props) {
 
 				<div className="space"></div>
 				<div className="row">
-					{files.map(f => {
+					{files && files.map(f => {
 						return (
 							<div key={f.uri} className="col-md-4">
 								{parseInt(f.type) === 0 &&
